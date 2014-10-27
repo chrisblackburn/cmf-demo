@@ -34,9 +34,9 @@ ActiveAdmin.register Content do
     f.inputs 'Content' do
       f.semantic_errors
       f.input :title
-      f.input :content
-      f.input :live_from, as: :datepicker
-      f.input :live_to, as: :datepicker
+      f.input :content, input_html: { class: 'sir-trevor-area visuallyhidden' }
+      f.input :live_from, as: :datepicker, input_html: { class: 'hasDatetimePicker' }
+      f.input :live_to, as: :datepicker, input_html: { class: 'hasDatetimePicker' }
     end
 
     f.actions
