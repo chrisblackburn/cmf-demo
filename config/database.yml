@@ -1,0 +1,19 @@
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
+development:
+  adapter: mysql2
+  encoding: utf8
+  host: localhost
+  database: cdp
+  username: root
+  password: root
+
+test: &test
+  <<: *default
+  database: db/test.sqlite3
+
+cucumber:
+  <<: *test
