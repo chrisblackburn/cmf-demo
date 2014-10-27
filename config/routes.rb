@@ -4,4 +4,8 @@ Rails.application.routes.draw do
 
   get '/content/:slug', to: 'content#show', as: 'content'
   get '/dataset', to: 'dataset#show', as: 'dataset'
+
+  scope 'admin' do
+    post '/image-upload', to: 'sir_trevor_images#upload', as: 'sir_trevor_image_upload'
+  end
 end

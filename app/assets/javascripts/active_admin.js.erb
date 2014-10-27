@@ -16,6 +16,10 @@ $(function(){
     });
   }
 
+  SirTrevor.setDefaults({
+    uploadUrl: "<%= Rails.application.routes.url_helpers.send(:sir_trevor_image_upload_path) %>"
+  });
+
   $('input.hasDatetimePicker').datetimepicker({
     dateFormat: "dd/mm/yy",
     beforeShow: function () {
