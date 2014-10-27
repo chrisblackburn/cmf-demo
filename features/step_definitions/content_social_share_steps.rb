@@ -1,11 +1,7 @@
 Given(/^I create a piece of approved content$/) do
-  create_user_and_login_cms
-  visit new_admin_content_path
-  fill_in 'Title', with: 'My Job'
-  fill_in 'Content', with: 'Why not apply for this job?'
-  click_button 'Create Content'
-
-  Content.first.approve!
+  FactoryGirl.create(:content,
+    approved_at: Time.now
+  )
 end
 
 Then(/^I should see social sharing links$/) do
