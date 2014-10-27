@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027103543) do
+ActiveRecord::Schema.define(version: 20141027154121) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 20141027103543) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "approved_at"
+  end
+
+  create_table "datasets", force: true do |t|
+    t.string   "discloser_name"
+    t.integer  "disclosure_score"
+    t.string   "gics_sector"
+    t.string   "gics_industry_group"
+    t.string   "gics_industry"
+    t.string   "gics_sub_industry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "friendly_id_slugs", force: true do |t|

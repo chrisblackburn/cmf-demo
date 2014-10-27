@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get '/content/:slug', to: 'content#show', as: 'content'
+  get '/dataset', to: 'dataset#show', as: 'dataset'
 end

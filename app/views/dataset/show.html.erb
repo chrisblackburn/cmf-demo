@@ -1,0 +1,25 @@
+<table>
+  <thead>
+    <tr>
+      <th>Discloser name</th>
+      <th>Disclosure score</th>
+      <th>GICS Sector</th>
+      <th>GICS Industry Group</th>
+      <th>GICS Industry</th>
+      <th>GIVS Sub-industry</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dataset.each do |row| %>
+      <tr>
+        <td><%= row.discloser_name %></td>
+        <td><%= row.disclosure_score %></td>
+        <td><%= row.gics_sector %></td>
+        <td><%= row.gics_industry_group %></td>
+        <td><%= row.gics_industry %></td>
+        <td><%= row.gics_sub_industry %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
