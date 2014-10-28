@@ -2,6 +2,39 @@
   <% if block['source'] == 'vimeo' %>
     <iframe src="//player.vimeo.com/video/<%= block['remote_id'] %>?title=1&amp;byline=1&amp;portrait=1&amp;autoplay=0" width="600" height="400" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
   <% elsif block['source'] == 'youtube' %>
-    <iframe width="600" height="400" src="//www.youtube.com/embed/<%= block['remote_id'] %>" frameborder="0" allowfullscreen></iframe>
+    <div id="youtube-player"></div>
+
+    <script>
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-player', {
+          height: '400',
+          width: '600',
+          videoId: '<%= block['remote_id'] %>',
+          playerVars: { rel: 0 },
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+
+        $('.video-block').fitVids();
+      }
+
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+          alert('tracking video play');
+        }
+
+        if (event.data == YT.PlayerState.ENDED) {
+          alert('tracking video ended');
+        }
+      }
+    </script>
   <% end %>
 </div>

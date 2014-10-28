@@ -17,7 +17,5 @@
 
 $(function () {
   $('.dropdown-toggle').dropdown();
-
-  $(".video-block").fitVids();
 });
 
