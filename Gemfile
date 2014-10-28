@@ -6,6 +6,7 @@ gem 'cancan',                     '1.6.10'
 gem 'devise',                     '3.2.4'
 gem 'friendly_id',                '5.0.4'
 gem 'rails',                      '4.1.5'
+gem 'redcarpet',                  '2.0.1'
 gem 'rich',                       github: 'bastiaanterhorst/rich', branch: 'master', ref: '53dba32'
 
 group :development do

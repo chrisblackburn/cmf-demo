@@ -211,6 +211,7 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.1)
+    redcarpet (2.0.1)
     responders (1.0.0)
       railties (>= 3.2, < 5)
     rspec (3.0.0)
@@ -303,6 +304,7 @@ DEPENDENCIES
   log_switch (= 0.3.0)
   mysql2 (= 0.3.16)
   rails (= 4.1.5)
+  redcarpet (= 2.0.1)
   rich!
   rspec (= 3.0.0)
   rspec-core (= 3.0.3)
