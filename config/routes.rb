@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get '/dataset', to: 'dataset#show', as: 'dataset'
 
   scope 'admin' do
-    post '/image-upload', to: 'sir_trevor_images#upload', as: 'sir_trevor_image_upload'
+    post '/file-upload', to: 'sir_trevor#file_upload', as: 'sir_trevor_file_upload'
   end
 end

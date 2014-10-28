@@ -5,6 +5,59 @@
 //= require sir-trevor
 
 $(function(){
+  SirTrevor.Blocks.File = SirTrevor.Block.extend({
+    type: "file",
+    title: function() { return 'File' },
+
+    droppable: true,
+    uploadable: true,
+
+    icon_name: 'image',
+
+    loadData: function(data){
+      file_name = data.file.url.substring(data.file.url.lastIndexOf('/') + 1);
+
+      this.$editor.html(
+        $('<span>', { 'class': 'st-icon', html: 'image' })[0].outerHTML +
+        $('<span>', { html: file_name, style: 'display: inline-block; padding-left: 10px;' })[0].outerHTML
+      ).show();
+    },
+
+    onBlockRender: function(){
+      this.$inputs.find('button').bind('click', function(ev){ ev.preventDefault(); });
+      this.$inputs.find('input').on('change', _.bind(function(ev){
+        this.onDrop(ev.currentTarget);
+      }, this));
+    },
+
+    onDrop: function(transferData){
+      var file = transferData.files[0],
+          urlAPI = (typeof URL !== "undefined") ? URL : (typeof webkitURL !== "undefined") ? webkitURL : null;
+
+      // Handle one upload at a time
+      this.loading();
+      // Show this image on here
+      this.$inputs.hide();
+      this.loadData({file: {url: urlAPI.createObjectURL(file)}});
+
+      this.uploader(
+        file,
+        function(data) {
+          this.setData(data);
+          this.ready();
+        },
+        function(error){
+          this.addMessage(i18n.t('blocks:image:upload_error'));
+          this.ready();
+        }
+      );
+    }
+  });
+
+  SirTrevor.setDefaults({
+    uploadUrl: "<%= Rails.application.routes.url_helpers.send(:sir_trevor_file_upload_path) %>"
+  });
+
   var instances = $('.sir-trevor-area'),
       l = instances.length, instance;
 
@@ -12,16 +65,12 @@ $(function(){
     instance = $(instances[l]);
     new SirTrevor.Editor({
       el: instance,
-      blockTypes: ["Quote", "Heading", "Image", "Text", "Code", "Tweet", "List", "Video"]
+      blockTypes: ["Quote", "Heading", "Image", "Text", "Code", "Tweet", "List", "Video", "File"]
     });
   }
 
-  SirTrevor.setDefaults({
-    uploadUrl: "<%= Rails.application.routes.url_helpers.send(:sir_trevor_image_upload_path) %>"
-  });
-
   $('input.hasDatetimePicker').datetimepicker({
-    dateFormat: "dd/mm/yy",
+    dateFormat: 'dd/mm/yy',
     beforeShow: function () {
       setTimeout(
         function () {
