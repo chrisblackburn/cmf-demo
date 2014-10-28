@@ -54,6 +54,35 @@ $(function(){
     }
   });
 
+
+  SirTrevor.Blocks.Embed = SirTrevor.Block.extend({
+
+    type: "embed",
+
+    title: function() { return 'Embed' },
+
+    editorHTML: '<div class="st-required st-embed-block" contenteditable="true"></div>',
+
+    icon_name: 'video',
+
+    pastable: true,
+
+    onContentPasted: function(event){
+      this.handleDropPaste($(event.target).val());
+    },
+
+    handleDropPaste: function(data){
+      var embed = {
+        embed: data
+      }
+      this.setAndLoadData(embed);
+    },
+
+    loadData: function(data){
+      this.$editor.html(data.embed);
+    }
+  });
+
   SirTrevor.setDefaults({
     uploadUrl: "<%= Rails.application.routes.url_helpers.send(:sir_trevor_file_upload_path) %>"
   });
@@ -65,7 +94,7 @@ $(function(){
     instance = $(instances[l]);
     new SirTrevor.Editor({
       el: instance,
-      blockTypes: ["Quote", "Heading", "Image", "Text", "Code", "Tweet", "List", "Video", "File"]
+      blockTypes: ["Quote", "Heading", "Image", "Text", "Code", "Tweet", "List", "Video", "File", "Embed"]
     });
   }
 
