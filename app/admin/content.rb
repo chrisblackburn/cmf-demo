@@ -30,6 +30,14 @@ ActiveAdmin.register Content do
     end
   end
 
+  index do
+    column :title
+    column :live_from
+    column :live_to
+    column :approved_at
+    actions
+  end
+
   form do |f|
     f.inputs 'Content' do
       f.semantic_errors
