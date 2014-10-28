@@ -13,7 +13,7 @@ When(/^I view the content on the website$/) do
 end
 
 Then(/^I should see the video and the presentation$/) do
-  expect(page).to have_xpath('//iframe[@src="//www.youtube.com/embed/wG2C3JbaaUo"]')
+  expect(page.html).to have_content("videoId: 'wG2C3JbaaUo'")
   expect(page).to have_xpath('//iframe[@src="//www.slideshare.net/slideshow/embed_code/40665069"]')
 end
 

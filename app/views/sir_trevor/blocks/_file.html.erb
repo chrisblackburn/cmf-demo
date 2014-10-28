@@ -1,3 +1,3 @@
 <div class="content-block file-block" style="padding: 20px 0;">
-  <i class="icon-file"></i> <%= link_to File.basename(block['file']['url']), block['file']['url'] %>
+  <i class="icon-file"></i> <%= link_to File.basename(block['file']['url']), block['file']['url'], onclick: 'return alert("tracking download");' %>
 </div>
