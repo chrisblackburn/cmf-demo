@@ -13,3 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery.fitvids
+
+$(function () {
+  $('.dropdown-toggle').dropdown();
+
+  $(".video-block").fitVids();
+});
+
