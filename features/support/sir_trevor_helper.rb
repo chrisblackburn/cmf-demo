@@ -16,8 +16,8 @@ module Cdp
       '{"type":"heading","data":{"text":"Check out this article"}}'
     end
 
-    def sir_trevor_text
-      '{"type":"text","data":{"text":"fsdfdsfdsf\nfdsfds\nfdsfdsf\nfdsfdsfds\n"}}'
+    def sir_trevor_text(text='Lorum ipsum dolor')
+      "{\"type\":\"text\",\"data\":\{\"text\":\"#{text}\"\}}"
     end
 
     def sir_trevor_file

@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
 
-gem 'activeadmin',                github: 'gregbell/active_admin', ref: '67e239cc2e7b99e9c4160da9bb30770b1f78a8d2'
+gem 'activeadmin',                github: 'gregbell/active_admin', ref: '67e239c'
+gem 'activeadmin-globalize',      github: 'stefanoverna/activeadmin-globalize', ref: '269c39a7'
 gem 'cancan',                     '1.6.10'
 gem 'devise',                     '3.2.4'
 gem 'friendly_id',                '5.0.4'

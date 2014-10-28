@@ -9,5 +9,8 @@ module Cdp
     config.action_mailer.default_options = {
       from: 'cmf@example.org'
     }
+
+    config.i18n.available_locales = [:en, :de]
+    config.i18n.fallbacks = true
   end
 end

@@ -3,7 +3,7 @@ Given(/^I create a piece of content that is not yet approved$/) do
   create_cms_approver
   visit new_admin_content_path
   fill_in 'Title', with: 'Content needing approval'
-  fill_in 'Content', with: 'Needs approval'
+  fill_in 'content_translations_attributes_1_content', with: 'Needs approval'
   click_button 'Create Content'
 end
 

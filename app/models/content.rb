@@ -4,6 +4,9 @@ class Content < ActiveRecord::Base
 
   friendly_id :title, use: [:slugged, :finders]
 
+  translates :content
+  active_admin_translates :content
+
   def approve!
     update_attributes!(approved_at: Time.now)
   end

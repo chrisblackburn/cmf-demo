@@ -7,10 +7,7 @@ ActiveAdmin.register Content do
   filter :live_from
   filter :live_to
 
-  permit_params [:title,
-                 :content,
-                 :live_from,
-                 :live_to]
+  permit_params :title, :live_from, :live_to, translations_attributes: [:id, :locale, :content]
 
   member_action :approve, method: :post do
     content = Content.find(params[:id])
@@ -42,7 +39,9 @@ ActiveAdmin.register Content do
     f.inputs 'Content' do
       f.semantic_errors
       f.input :title
-      f.input :content, input_html: { class: 'sir-trevor-area visuallyhidden' }
+      f.translated_inputs "Translated fields", switch_locale: false do |t|
+        t.input :content, input_html: { class: 'sir-trevor-area visuallyhidden' }
+      end
       f.input :live_from, as: :datepicker, input_html: { class: 'hasDatetimePicker' }
       f.input :live_to, as: :datepicker, input_html: { class: 'hasDatetimePicker' }
     end
