@@ -1,19 +1,24 @@
 {
  "name": "flare",
  "children": [
-   <% Dataset.all.group_by(&:gics_sector).each do |sector, group| %>
+   <%
+    groups = @dataset.group_by(&:gics_sector)
+    groups.each_with_index do |(sector, group), index|
+   %>
    {
      "name": "<%= sector %>",
      "children": [{
        "name": "<%= sector %>",
        "children": [
-        <% group.each_with_index do |item, index| %>
-         {"name": "<%= item.discloser_name %>", "size": <%= item.disclosure_score * 2000 %>}<% if index +1 != group.length %>,<% end %>
+        <% group.each_with_index do |item, group_index| %>
+          {
+            "name": "<%= item.discloser_name %>",
+            "size": <%= item.disclosure_score %>
+          }<% if group_index +1 != group.length %>,<% end %>
         <% end %>
        ]
       }]
-    },
+    }<% if index +1 != groups.length %>,<% end %>
    <% end %>
-    {"name": "Visualization", "size": 16540}
  ]
 }
