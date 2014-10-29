@@ -18,16 +18,17 @@
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-  var diameter = 900,
+(function() {
+  var diameter_g = 900,
       format = d3.format(",d");
 
   var pack = d3.layout.pack()
-      .size([diameter - 4, diameter - 4])
+      .size([diameter_g - 4, diameter_g - 4])
       .value(function(d) { return d.size; });
 
   var svg = d3.select("#grouped").append("svg")
-      .attr("width", diameter)
-      .attr("height", diameter)
+      .attr("width", diameter_g)
+      .attr("height", diameter_g)
     .append("g")
       .attr("transform", "translate(2,2)");
 
@@ -51,5 +52,6 @@
         .text(function(d) { return d.name.substring(0, d.r / 3); });
   });
 
-  d3.select(self.frameElement).style("height", diameter + "px");
+  d3.select(self.frameElement).style("height", diameter_g + "px");
+}());
 </script>

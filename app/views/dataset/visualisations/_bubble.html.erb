@@ -1,5 +1,6 @@
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script>
+(function() {
   var diameter = 1000,
       format = d3.format(",d"),
       color = d3.scale.category20c();
@@ -48,4 +49,5 @@
   }
 
   d3.select(self.frameElement).style("height", diameter + "px");
+}());
 </script>

@@ -11,7 +11,7 @@
 </style>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-
+(function() {
 var margin = {top: 40, right: 10, bottom: 10, left: 10},
     width = 900 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -58,5 +58,6 @@ function position() {
       .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
       .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
 }
+}());
 
 </script>
