@@ -1,83 +1,52 @@
-<table id="dataset" data-height="500" data-sort-name="sector" data-sort-order="sector">
-  <thead>
-    <tr>
-      <th>Discloser name</th>
-      <th>Disclosure score</th>
-      <th data-field="sector" data-sortable="true">GICS Sector</th>
-      <th>GICS Industry Group</th>
-      <th>GICS Industry</th>
-      <th>GIVS Sub-industry</th>
-    </tr>
-  </thead>
+<ul class="nav nav-pills" role="tablist">
+  <li class="active"><a href="#data" role="tab" data-toggle="tab">Data</a></li>
+  <li><a href="#bubbles" data-toggle="tab">Bubbles</a></li>
+  <li><a href="#grouped" data-toggle="tab">Grouped</a></li>
+  <li><a href="#treemap" data-toggle="tab">Treemap</a></li>
+</ul>
 
-  <tbody>
-    <% @dataset.each do |row| %>
-      <tr>
-        <td><%= row.discloser_name %></td>
-        <td><%= row.disclosure_score %></td>
-        <td><%= row.gics_sector %></td>
-        <td><%= row.gics_industry_group %></td>
-        <td><%= row.gics_industry %></td>
-        <td><%= row.gics_sub_industry %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="data">
+    <table id="dataset" data-height="500" data-sort-name="sector" data-sort-order="sector">
+      <thead>
+        <tr>
+          <th>Discloser name</th>
+          <th>Disclosure score</th>
+          <th data-field="sector" data-sortable="true">GICS Sector</th>
+          <th>GICS Industry Group</th>
+          <th>GICS Industry</th>
+          <th>GIVS Sub-industry</th>
+        </tr>
+      </thead>
 
-<script>
-  $('#dataset').bootstrapTable();
-</script>
+      <tbody>
+        <% @dataset.each do |row| %>
+          <tr>
+            <td><%= row.discloser_name %></td>
+            <td><%= row.disclosure_score %></td>
+            <td><%= row.gics_sector %></td>
+            <td><%= row.gics_industry_group %></td>
+            <td><%= row.gics_industry %></td>
+            <td><%= row.gics_sub_industry %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script>
-var diameter = 1200,
-    format = d3.format(",d"),
-    color = d3.scale.category20c();
+    <script>
+      $('#dataset').bootstrapTable();
+    </script>
+  </div>
 
-var bubble = d3.layout.pack()
-    .sort(null)
-    .size([diameter, diameter])
-    .padding(1.5);
+  <div id="bubbles" class="tab-pane fade">
+    <%= render partial: 'dataset/visualisations/bubble' %>
+  </div>
 
-var svg = d3.select("body").append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-    .attr("class", "bubble");
+  <div id="grouped" class="tab-pane fade">
+    <%= render partial: 'dataset/visualisations/grouped' %>
+  </div>
 
-d3.json("<%= dataset_path(format: :json) %>", function(error, root) {
-  var node = svg.selectAll(".node")
-      .data(bubble.nodes(classes(root))
-      .filter(function(d) { return !d.children; }))
-    .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-
-  node.append("title")
-      .text(function(d) { return d.className + ": " + format(d.value); });
-
-  node.append("circle")
-      .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { return color(d.packageName); });
-
-  node.append("text")
-      .attr("dy", ".3em")
-      .style("text-anchor", "middle")
-      .text(function(d) { return d.className.substring(0, d.r / 3); });
-});
-
-// Returns a flattened hierarchy containing all leaf nodes under the root.
-function classes(root) {
-  var classes = [];
-
-  function recurse(name, node) {
-    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-    else classes.push({packageName: name, className: node.name, value: node.size});
-  }
-
-  recurse(null, root);
-  return {children: classes};
-}
-
-d3.select(self.frameElement).style("height", diameter + "px");
-</script>
-
+  <div id="treemap" class="tab-pane fade">
+    <%= render partial: 'dataset/visualisations/treemap' %>
+  </div>
+</div>
