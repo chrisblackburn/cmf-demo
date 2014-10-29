@@ -1,3 +1,33 @@
+<table id="dataset" data-height="500" data-sort-name="sector" data-sort-order="sector">
+  <thead>
+    <tr>
+      <th>Discloser name</th>
+      <th>Disclosure score</th>
+      <th data-field="sector" data-sortable="true">GICS Sector</th>
+      <th>GICS Industry Group</th>
+      <th>GICS Industry</th>
+      <th>GIVS Sub-industry</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dataset.each do |row| %>
+      <tr>
+        <td><%= row.discloser_name %></td>
+        <td><%= row.disclosure_score %></td>
+        <td><%= row.gics_sector %></td>
+        <td><%= row.gics_industry_group %></td>
+        <td><%= row.gics_industry %></td>
+        <td><%= row.gics_sub_industry %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  $('#dataset').bootstrapTable();
+</script>
+
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script>
 var diameter = 1200,
@@ -51,32 +81,3 @@ function classes(root) {
 d3.select(self.frameElement).style("height", diameter + "px");
 </script>
 
-<table id="dataset" data-height="500" data-sort-name="sector" data-sort-order="sector">
-  <thead>
-    <tr>
-      <th>Discloser name</th>
-      <th>Disclosure score</th>
-      <th data-field="sector" data-sortable="true">GICS Sector</th>
-      <th>GICS Industry Group</th>
-      <th>GICS Industry</th>
-      <th>GIVS Sub-industry</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @dataset.each do |row| %>
-      <tr>
-        <td><%= row.discloser_name %></td>
-        <td><%= row.disclosure_score %></td>
-        <td><%= row.gics_sector %></td>
-        <td><%= row.gics_industry_group %></td>
-        <td><%= row.gics_industry %></td>
-        <td><%= row.gics_sub_industry %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<script>
-  $('#dataset').bootstrapTable();
-</script>

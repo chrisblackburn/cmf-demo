@@ -5,7 +5,7 @@
    {
      "name": "<%= sector %>",
      "children": [{
-       "name": "cluster",
+       "name": "<%= sector %>",
        "children": [
         <% group.each_with_index do |item, index| %>
          {"name": "<%= item.discloser_name %>", "size": <%= item.disclosure_score * 2000 %>}<% if index +1 != group.length %>,<% end %>
